@@ -18,15 +18,6 @@ steps:
     working_directory: ./
     tag: v0.0.1
     dockerfile: Dockerfile
-  PushBranch:
-    title: Pushing tagged image to Docker Hub
-    stage: upload
-    type: push
-    arguments:
-      candidate: '${{BuildDockerImage}}'
-      tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
-      image_name: dzirkler/openvpn-client
-      registry: dockerhub
   PushLatest:
     title: Pushing latest image to Docker Hub
     stage: upload
@@ -40,3 +31,12 @@ steps:
         condition:
           all:
             masterBranch: '"${{CF_BRANCH}}" == "master"'
+  PushBranch:
+    title: Pushing tagged image to Docker Hub
+    stage: upload
+    type: push
+    arguments:
+      candidate: '${{BuildDockerImage}}'
+      tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
+      image_name: dzirkler/openvpn-client
+      registry: dockerhub
