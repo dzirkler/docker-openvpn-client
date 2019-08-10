@@ -24,7 +24,7 @@ steps:
     type: push
     arguments:
       candidate: '${{BuildDockerImage}}'
-      tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
+      tag: latest
       image_name: dzirkler/openvpn-client
       registry: dockerhub
       when:
